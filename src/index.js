@@ -7,6 +7,8 @@ const config = {
   delete: argv[2] || false
 };
 
+console.log(config);
+
 exports.config = config;
 
 const walkDir = require('./modules/walkDir');
