@@ -11,6 +11,11 @@ const copyFile = (base, item) => {
 
   fs.copyFileSync(path.join(__dirname, '../', base, item), path.join(outputDirPath, item));
   console.log(`Файл ${item} скопирован!`);
+
+  if (config.delete) {
+    fs.unlinkSync(path.join(__dirname, '../', base, item));
+    console.log(`Исходный файл ${item} удален!`);
+  }
 };
 
 module.exports = copyFile;

@@ -20,12 +20,5 @@ if (fs.existsSync(config.output)) {
 fs.mkdir(config.output, (err) => {
   if (err) throw err;
   console.log(`Новая папка ${config.output} создана!`);
-  walkDir(config.input, (base, item) => copyFile(base, item));
-});
-
-process.on('exit', (code) => {
-  if (code === 0 && config.delete) {
-    walkDir(config.input, (base, item) => fs.unlinkSync(path.join(base, item)), base => fs.rmdirSync(base));
-    console.log(`Исходная папка ${config.input} Удалена!`);
-  }
+  walkDir(config.input, (base, item) => copyFile(base, item), base => config.delete && fs.rmdirSync(base));
 });
